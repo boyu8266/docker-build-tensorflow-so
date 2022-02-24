@@ -8,11 +8,11 @@ RUN apt update && \
 # GCC
 ARG CMAKE_VERSION=3.22.2
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.sh \
-      -q -O /tmp/cmake-install.sh \
-      && chmod u+x /tmp/cmake-install.sh \
-      && mkdir /usr/bin/cmake \
-      && /tmp/cmake-install.sh --skip-license --prefix=/usr/bin/cmake \
-      && rm /tmp/cmake-install.sh
+    -q -O /tmp/cmake-install.sh \
+    && chmod u+x /tmp/cmake-install.sh \
+    && mkdir /usr/bin/cmake \
+    && /tmp/cmake-install.sh --skip-license --prefix=/usr/bin/cmake \
+    && rm /tmp/cmake-install.sh
 ENV PATH="/usr/bin/cmake/bin:${PATH}"
 
 # Git
@@ -21,6 +21,9 @@ RUN apt install git -y
 # Python
 RUN apt install python3 python3-dev python3-pip -y
 RUN pip3 install numpy wheel
+
+# OpenCv
+RUN apt-get install libopencv-dev python-opencv -y
 
 # BAZEL
 ARG BAZEL_VERSION=3.1.0
